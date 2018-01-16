@@ -81,7 +81,7 @@ public class Constants extends BaseConstants {
 
     public static final String KEY_SELECTOR = "key_SELECTOR";
 
-    public static final String FC = "FSmartMeilun";
+    public static final String FC = "FAglSmart";
 
     /**
      * 主机配置类型

@@ -2,8 +2,8 @@
 <resources>
 
     <!-- 常用颜色值 -->
-    <color name="base_color">#4C4FA6</color>
-    <color name="default_color">#4C4FA6</color>
+    <color name="base_color">#1372c2</color>
+    <color name="default_color">#1372c2</color>
     <color name="base_line">#E7E7E7</color>
     <color name="base_gray">#F3F5F7</color>
     <color name="default_gray">#999</color>

@@ -3,7 +3,7 @@ package com.meilun.security.smart.camera;
 import android.os.Bundle;
 
 import com.meilun.security.smart.R;
-import com.meilun.security.smart.entity.bean.DeviceListBean;
+import com.meilun.security.smart.entity.bean.MainDeviceBean;
 
 import cn.itsite.abase.mvp.view.base.BaseActivity;
 
@@ -19,13 +19,13 @@ public class CameraSettingActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
-            DeviceListBean.DataBean.SubDevicesBean bean = (DeviceListBean.DataBean.SubDevicesBean) getIntent().getSerializableExtra("bean");
+            MainDeviceBean bean = (MainDeviceBean) getIntent().getSerializableExtra("bean");
             loadRootFragment(R.id.fl_main_activity, CameraSettingFragment.newInstance(bean));
         }
     }
 
-    @Override
-    public boolean swipeBackPriority() {
-        return false;
-    }
+//    @Override
+//    public boolean swipeBackPriority() {
+//        return false;
+//    }
 }

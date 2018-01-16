@@ -1,7 +1,6 @@
 package com.meilun.security.smart.room.view;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -19,8 +18,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.meilun.security.smart.R;
-import com.meilun.security.smart.camera.CameraPlay2Activity;
-import com.meilun.security.smart.camera.CameraSettingFragment;
 import com.meilun.security.smart.common.Constants;
 import com.meilun.security.smart.common.Params;
 import com.meilun.security.smart.entity.bean.BaseBean;
@@ -39,7 +36,6 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.io.Serializable;
 import java.util.List;
 
 import butterknife.BindView;
@@ -215,9 +211,9 @@ public class RoomDeviceListFragment extends BaseFragment<RoomDeviceListContract.
                 }
                 _mActivity.start(DeviceTypeFragment.newInstance(selectRoom.getFid()));
             } else if ("camera01".equals(bean.getDeviceType())) {
-                Intent intent = new Intent(_mActivity, CameraPlay2Activity.class);
-                intent.putExtra("bean", (Serializable) bean);
-                startActivity(intent);
+//                Intent intent = new Intent(_mActivity, CameraPlay2Activity.class);
+//                intent.putExtra("bean", (Serializable) bean);
+//                startActivity(intent);
             } else {
                 _mActivity.start(DeviceOnOffFragment.newInstance(bean/*, selectRoom*/));
             }
@@ -233,7 +229,7 @@ public class RoomDeviceListFragment extends BaseFragment<RoomDeviceListContract.
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     if (which == 0) {
-                                        _mActivity.start(CameraSettingFragment.newInstance(bean));
+//                                        _mActivity.start(CameraSettingFragment.newInstance(bean));
                                     } else {
 
                                         showDeleteCameraDialog(bean);

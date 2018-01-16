@@ -1,6 +1,5 @@
 package com.meilun.security.smart.security.view;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.meilun.security.smart.camera.CameraPlay2Activity;
 import com.meilun.security.smart.common.Constants;
 import com.meilun.security.smart.common.Params;
 import com.meilun.security.smart.entity.bean.BaseBean;
@@ -23,7 +21,6 @@ import com.meilun.security.smart.room.view.DeviceGridRVAdapter;
 import com.meilun.security.smart.room.view.DeviceOnOffFragment;
 import com.meilun.security.smart.room.view.DeviceTypeFragment;
 
-import java.io.Serializable;
 import java.util.List;
 
 import cn.itsite.abase.mvp.view.base.BaseFragment;
@@ -95,9 +92,9 @@ public class SecurityControlFragment extends BaseFragment<RoomDeviceListPresente
 //                    }
                     _mActivity.start(DeviceTypeFragment.newInstance());
                 } else if ("camera01".equals(bean.getDeviceType())) {
-                    Intent intent = new Intent(_mActivity, CameraPlay2Activity.class);
-                    intent.putExtra("bean", (Serializable) bean);
-                    startActivity(intent);
+//                    Intent intent = new Intent(_mActivity, CameraPlay2Activity.class);
+//                    intent.putExtra("bean", (Serializable) bean);
+//                    startActivity(intent);
                 } else {
                     _mActivity.start(DeviceOnOffFragment.newInstance(bean/*, selectRoom*/));
                 }

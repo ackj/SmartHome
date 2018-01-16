@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.meilun.security.smart.R;
 import com.meilun.security.smart.camera.CameraPlay2Activity;
+import com.meilun.security.smart.camera.CameraSettingFragment;
 import com.meilun.security.smart.camera.CameraWifiInput2Fragment;
 import com.meilun.security.smart.cateye.view.MonitorFragment;
 import com.meilun.security.smart.common.Constants;
@@ -32,6 +33,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -157,7 +159,7 @@ public class DeviceListFragment extends BaseFragment<DeviceListPresenter> {
             @Override
             public void onClickCamera(MainDeviceBean bean) {
                 Intent intent = new Intent(_mActivity, CameraPlay2Activity.class);
-                intent.putExtra("bean", bean);
+                intent.putExtra("bean", (Serializable) bean);
                 _mActivity.startActivity(intent);
             }
 
@@ -169,16 +171,30 @@ public class DeviceListFragment extends BaseFragment<DeviceListPresenter> {
             @Override
             public void onClickLongCamera(MainDeviceBean bean) {
                 new AlertDialog.Builder(_mActivity)
-                        .setTitle("提示")
-                        .setMessage("确定要删除该摄像头吗？")
-                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        .setItems(new String[]{"删除","设置"}, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                params.no = bean.deviceId;
-                                mPresenter.requestDeleteCamera(params);
+                                if(which==0){
+                                    new AlertDialog.Builder(_mActivity)
+                                            .setTitle("提示")
+                                            .setMessage("确定要删除该摄像头吗？")
+                                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    params.no = bean.deviceId;
+                                                    mPresenter.requestDeleteCamera(params);
+                                                }
+                                            })
+                                            .setNegativeButton("取消",null)
+                                            .show();
+                                }else{
+                                    _mActivity.start(CameraSettingFragment.newInstance(bean));
+//                                    Intent intent = new Intent(_mActivity, CameraSettingActivity.class);
+//                                    intent.putExtra("bean",  bean);
+//                                    startActivity(intent);
+                                }
                             }
                         })
-                        .setNegativeButton("取消",null)
                         .show();
             }
         });

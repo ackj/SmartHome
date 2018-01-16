@@ -762,4 +762,15 @@ public interface ApiService {
                                              @Field("token") String token,
                                              @Field("catEyeSerialNo") String catEyeSerialNo);
 
+    String requestModMainDevice = BASE_URL+"/ctrl/client/modMainDevice";
+
+    @FormUrlEncoded
+    @POST
+    Observable<BaseBean> requestModMainDevice(@Url String url,
+                                              @Field("token") String token,
+                                              @Field("type") String type,
+                                              @Field("serialNO") String serialNO,
+                                              @Field("name") String name,
+                                              @Field("password") String password
+    );
 }

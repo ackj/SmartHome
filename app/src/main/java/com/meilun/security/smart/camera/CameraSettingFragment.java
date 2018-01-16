@@ -17,7 +17,7 @@ import com.meilun.security.smart.camera.contract.CameraSettingContract;
 import com.meilun.security.smart.camera.presenter.CameraSettingPresenter;
 import com.meilun.security.smart.common.Params;
 import com.meilun.security.smart.entity.bean.BaseBean;
-import com.meilun.security.smart.entity.bean.DeviceListBean;
+import com.meilun.security.smart.entity.bean.MainDeviceBean;
 import com.meilun.security.smart.event.EventCameraListRefresh;
 import com.meilun.security.smart.event.EventCameraPwdChanged;
 import com.p2p.core.P2PHandler;
@@ -55,7 +55,7 @@ public class CameraSettingFragment extends BaseFragment<CameraSettingContract.Pr
     TextView tvAccount;
 
     Unbinder unbinder;
-    private DeviceListBean.DataBean.SubDevicesBean bean;
+    private MainDeviceBean bean;
     //    private AlertDialog.Builder dialogBuilder;
     private boolean isNickname;
     private Params params = Params.getInstance();
@@ -68,7 +68,7 @@ public class CameraSettingFragment extends BaseFragment<CameraSettingContract.Pr
         return new CameraSettingPresenter(this);
     }
 
-    public static CameraSettingFragment newInstance(DeviceListBean.DataBean.SubDevicesBean bean) {
+    public static CameraSettingFragment newInstance(MainDeviceBean bean) {
         CameraSettingFragment fragment = new CameraSettingFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable("bean", bean);
@@ -81,9 +81,9 @@ public class CameraSettingFragment extends BaseFragment<CameraSettingContract.Pr
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_camera_setting, container, false);
         unbinder = ButterKnife.bind(this, view);
-        bean = (DeviceListBean.DataBean.SubDevicesBean) getArguments().getSerializable("bean");
+        bean = (MainDeviceBean) getArguments().getSerializable("bean");
         EventBus.getDefault().register(this);
-        return view;
+        return attachToSwipeBack(view);
     }
 
     @Override
@@ -108,11 +108,9 @@ public class CameraSettingFragment extends BaseFragment<CameraSettingContract.Pr
 
     private void initData() {
         if (bean != null) {
-            tvNickname.setText(bean.getName());
-            tvPassword.setText(bean.getPassword());
-            params.deviceType = bean.getDeviceType();
-            params.index = bean.getIndex();
-            tvAccount.setText(bean.getDeviceId());
+            tvNickname.setText(bean.userName);
+            tvPassword.setText(bean.userPwd);
+            tvAccount.setText(bean.deviceId);
         }
     }
 
@@ -140,7 +138,7 @@ public class CameraSettingFragment extends BaseFragment<CameraSettingContract.Pr
                 showInputDialog();
                 break;
             case R.id.ll_video:
-                _mActivity.start(CameraFileRecordFragment.newInstance(bean.getDeviceId(), bean.getPassword()));
+                _mActivity.start(CameraFileRecordFragment.newInstance(bean.deviceId, bean.userPwd));
                 break;
             default:
         }
@@ -153,11 +151,11 @@ public class CameraSettingFragment extends BaseFragment<CameraSettingContract.Pr
                 .setConvertListener((holder, dialog) -> {
                     EditText etInput = holder.getView(R.id.et_input_phone);
                     if (isNickname) {
-                        etInput.setText(bean.getName());
-                        etInput.setSelection(bean.getName().length());
+                        etInput.setText(bean.userName);
+                        etInput.setSelection(bean.userName.length());
                     } else {
-                        etInput.setText(bean.getPassword());
-                        etInput.setSelection(bean.getPassword().length());
+                        etInput.setText(bean.userPwd);
+                        etInput.setSelection(bean.userPwd.length());
                     }
 
                     holder.setText(R.id.tv_title, isNickname ? "请输入昵称" : "请输入密码")
@@ -188,8 +186,8 @@ public class CameraSettingFragment extends BaseFragment<CameraSettingContract.Pr
 
     private void updatePassword(String pwd) {
         params.devicePassword = pwd;
-        P2PHandler.getInstance().setDevicePassword(bean.getDeviceId(),
-                P2PHandler.getInstance().EntryPassword(bean.getPassword()),
+        P2PHandler.getInstance().setDevicePassword(bean.deviceId,
+                P2PHandler.getInstance().EntryPassword(bean.userPwd),
                 P2PHandler.getInstance().EntryPassword(pwd),
                 pwd, pwd);
     }
@@ -208,10 +206,10 @@ public class CameraSettingFragment extends BaseFragment<CameraSettingContract.Pr
     public void responseSuccess(BaseBean baseBean) {
         dismissLoading();
         if (isNickname) {
-            bean.setName(params.deviceName);
+            bean.userName = params.deviceName;
             tvNickname.setText(params.deviceName);
         } else {
-            bean.setPassword(params.devicePassword);
+            bean.userPwd = params.devicePassword;
             tvPassword.setText(params.devicePassword);
         }
         EventBus.getDefault().post(new EventCameraListRefresh());
