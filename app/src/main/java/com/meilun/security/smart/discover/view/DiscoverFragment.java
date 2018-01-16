@@ -222,8 +222,13 @@ public class DiscoverFragment extends BaseFragment<DiscoverContract.Presenter> i
     @Override
     public void responseFirstLevel(List<FirstLevelBean.DataBean> datas) {
         if (datas.size() > 0) {
-            params.id = datas.get(datas.size() - 1).getId();
-            mPresenter.requestSubCategoryList(params);
+            for (FirstLevelBean.DataBean bean : datas){
+                if("智能家居".equals(bean.getName())){
+                    params.id =  bean.getId();
+                    mPresenter.requestSubCategoryList(params);
+                    break;
+                }
+            }
         }
     }
 
