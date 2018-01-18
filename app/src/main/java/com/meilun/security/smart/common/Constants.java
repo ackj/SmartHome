@@ -82,6 +82,7 @@ public class Constants extends BaseConstants {
     public static final String KEY_SELECTOR = "key_SELECTOR";
 
     public static final String FC = "FAglSmart";
+    public static String OPERATOR_CODE="AglHz";
 
     /**
      * 主机配置类型

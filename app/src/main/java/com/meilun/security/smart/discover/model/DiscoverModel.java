@@ -1,6 +1,7 @@
 package com.meilun.security.smart.discover.model;
 
 import com.meilun.security.smart.common.ApiService;
+import com.meilun.security.smart.common.Constants;
 import com.meilun.security.smart.common.Params;
 import com.meilun.security.smart.discover.contract.DiscoverContract;
 import com.meilun.security.smart.entity.bean.BaseBean;
@@ -45,9 +46,7 @@ public class DiscoverModel extends BaseModel implements DiscoverContract.Model {
         return HttpHelper.getService(ApiService.class)
                 .requestDiscoverPage(ApiService.requestDiscoverPage,
                         params.token,
-                        params.fc,
-                        params.page,
-                        params.pageSize)
+                        Constants.OPERATOR_CODE)
                 .subscribeOn(Schedulers.io());
     }
 

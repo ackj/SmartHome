@@ -701,9 +701,7 @@ public interface ApiService {
     @GET
     Observable<DiscoverBean> requestDiscoverPage(@Url String url,
                                                  @Query("token") String token,
-                                                 @Query("fc") String fc,
-                                                 @Query("page") int page,
-                                                 @Query("pageSize") int pageSize);
+                                                 @Query("code")String code);
 
     String requestNewsList = BASE_URL + "/client/discovery/homepage/news";
 
