@@ -708,7 +708,7 @@ public interface ApiService {
     @GET
     Observable<NewsBean> requestNewsList(@Url String url,
                                          @Query("token") String token,
-                                         @Query("fc") String fc,
+                                         @Query("code") String code,
                                          @Query("page") int page,
                                          @Query("pageSize") int pageSize);
 

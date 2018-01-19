@@ -1,6 +1,7 @@
 package com.meilun.security.smart.discover.model;
 
 import com.meilun.security.smart.common.ApiService;
+import com.meilun.security.smart.common.Constants;
 import com.meilun.security.smart.common.Params;
 import com.meilun.security.smart.discover.contract.NewsContract;
 import com.meilun.security.smart.entity.bean.NewsBean;
@@ -17,7 +18,7 @@ public class NewsModel extends BaseModel implements NewsContract.Model {
         return HttpHelper.getService(ApiService.class)
                 .requestNewsList(ApiService.requestNewsList,
                         params.token,
-                        params.fc,
+                        Constants.OPERATOR_CODE,
                         params.page,
                         params.pageSize)
                 .subscribeOn(Schedulers.io());
