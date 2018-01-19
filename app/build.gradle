@@ -32,7 +32,7 @@ android {
         debug {
             keyAlias 'agl'
             keyPassword 'aglandroid'
-            storeFile file('F:/gaocheng/agl.keystore')
+            storeFile file('E:/Gaocheng/亿社区/agl.keystore')
             storePassword 'aglandroid'
         }
         release {
