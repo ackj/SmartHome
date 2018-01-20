@@ -130,9 +130,9 @@ public class Security2Fragment extends BaseFragment<SecurityPresenter> implement
         llHeaderLayout.setBackgroundResource(R.drawable.bg_security_header);
         List<BaseFragment> fragments = new ArrayList<>();
         defenseFragment = SecurityDefenseFragment.newInstance(gateway);
-        //默认设置一次
-        setTopView(ptrFrameLayout, defenseFragment.getRecyclerView());
         controlFragment = SecurityControlFragment.newInstance(gateway);
+        //默认设置一次
+        setTopView(ptrFrameLayout, controlFragment.getRecyclerView());
         fragments.add(controlFragment);
         fragments.add(defenseFragment);
         viewpager.setAdapter(new SecurityVPAdapter(getChildFragmentManager(), fragments));
@@ -171,11 +171,11 @@ public class Security2Fragment extends BaseFragment<SecurityPresenter> implement
             @Override
             public void onPageSelected(int position) {
                 if (position == 0) {
-                    isDefense = true;
-                    setTopView(ptrFrameLayout, defenseFragment.getRecyclerView());
-                } else {
                     isDefense = false;
                     setTopView(ptrFrameLayout, controlFragment.getRecyclerView());
+                } else {
+                    isDefense = true;
+                    setTopView(ptrFrameLayout, defenseFragment.getRecyclerView());
                 }
             }
 

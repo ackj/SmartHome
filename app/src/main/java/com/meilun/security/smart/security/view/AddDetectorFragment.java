@@ -176,12 +176,12 @@ public class AddDetectorFragment extends BaseFragment<AddDetectorContract.Presen
     }
 
     public void showTips() {
-        dialog = new AlertDialog.Builder(_mActivity)
-                .setTitle("温馨提醒")
-                .setMessage("正在学习中，请稍后…\n" + tipMap.get(params.sensorType))
-                .setNegativeButton("取消", (dialog, which) ->
-                        mPresenter.reqeuestCancellationOfSensorLearning(params))
-                .setCancelable(false)
-                .show();
+//        dialog = new AlertDialog.Builder(_mActivity)
+//                .setTitle("温馨提醒")
+//                .setMessage("正在学习中，请稍后…\n" + tipMap.get(params.sensorType))
+//                .setNegativeButton("取消", (dialog, which) ->
+//                        mPresenter.reqeuestCancellationOfSensorLearning(params))
+//                .setCancelable(false)
+//                .show();
     }
 }

@@ -100,7 +100,7 @@ public class SecurityDefenseFragment extends BaseFragment<SecurityPresenter> imp
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter1, View view, int position) {
-                if (position == adapter.getData().size() - 1 || position == 0) {
+                if (position == adapter.getData().size() - 1 ||  adapter.getData().size() == 1) {
                     _mActivity.start(AddDetectorFragment.newInstance());
                 } else {
                     SecurityBean.DataBean.SubDevicesBean bean = adapter.getItem(position);
