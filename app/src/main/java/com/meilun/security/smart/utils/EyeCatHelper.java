@@ -102,7 +102,29 @@ public class EyeCatHelper {
                         listener.loginFaild();
                     }
                 } else {
-                    listener.loginFaild();
+                    //走这里说明还没注册过猫眼，但是登录亿社区会员中心却成功了，所以要将用户再注册一次猫眼的会员系统
+                    register("GC" + account, new OnRegisterListener() {
+                        @Override
+                        public void registerSuccess() {
+                            //注册成功后仍需走一遍猫眼的登录
+                            login("GC" + account, new OnLoginListener() {
+                                @Override
+                                public void loginSuccess() {
+                                    listener.loginSuccess();
+                                }
+
+                                @Override
+                                public void loginFaild() {
+                                    listener.loginFaild();
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void registerFaild() {
+                            listener.loginFaild();
+                        }
+                    });
                 }
             }
         });

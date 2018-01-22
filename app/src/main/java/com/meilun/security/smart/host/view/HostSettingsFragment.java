@@ -14,7 +14,7 @@ import com.meilun.security.smart.R;
 import com.meilun.security.smart.common.ApiService;
 import com.meilun.security.smart.common.Constants;
 import com.meilun.security.smart.common.UserHelper;
-import com.meilun.security.smart.entity.bean.GatewaysBean;
+import com.meilun.security.smart.entity.bean.MainDeviceListBean;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -57,12 +57,12 @@ public class HostSettingsFragment extends BaseFragment {
     @BindView(R.id.tv_unbind_host_setting_fragment)
     TextView tvUnbind;
     private Unbinder unbinder;
-    private GatewaysBean.DataBean hostBean;
+    private MainDeviceListBean.DataBean hostBean;
     private RxManager mRxManager = new RxManager();
 
-    public static HostSettingsFragment newInstance(GatewaysBean.DataBean hostBean) {
+    public static HostSettingsFragment newInstance(MainDeviceListBean.DataBean hostBean) {
         Bundle args = new Bundle();
-        args.putParcelable(Constants.KEY_HOST, hostBean);
+        args.putSerializable(Constants.KEY_HOST, hostBean);
         HostSettingsFragment fragment = new HostSettingsFragment();
         fragment.setArguments(args);
         return fragment;
@@ -73,7 +73,7 @@ public class HostSettingsFragment extends BaseFragment {
         super.onCreate(savedInstanceState);
         Bundle args = getArguments();
         if (args != null) {
-            hostBean = args.getParcelable(Constants.KEY_HOST);
+            hostBean = (MainDeviceListBean.DataBean) args.getSerializable(Constants.KEY_HOST);
         }
     }
 
@@ -169,10 +169,10 @@ public class HostSettingsFragment extends BaseFragment {
         ALog.e("requestCode-->" + requestCode);
         ALog.e("resultCode-->" + resultCode);
         if (data != null) {
-            hostBean = data.getParcelable(Constants.KEY_HOST);
+            hostBean = (MainDeviceListBean.DataBean) data.getSerializable(Constants.KEY_HOST);
             tvHostName.setText(hostBean.getName());
             Bundle bundle = new Bundle();
-            bundle.putParcelable(Constants.KEY_HOST, hostBean);
+            bundle.putSerializable(Constants.KEY_HOST, hostBean);
             setFragmentResult(HostSettingsFragment.RESULT_HOST_SETTINGS, bundle);
         }
     }

@@ -19,7 +19,7 @@ import com.meilun.security.smart.common.Constants;
 import com.meilun.security.smart.common.LbsManager;
 import com.meilun.security.smart.common.Params;
 import com.meilun.security.smart.entity.bean.BaseBean;
-import com.meilun.security.smart.entity.bean.GatewaysBean;
+import com.meilun.security.smart.entity.bean.MainDeviceListBean;
 import com.meilun.security.smart.host.contract.AddHostContract;
 import com.meilun.security.smart.host.presenter.AddHostPresenter;
 import com.meilun.security.smart.location.LoacationFragment;
@@ -62,12 +62,12 @@ public class AddHostFragment extends BaseFragment<AddHostContract.Presenter> imp
     LinearLayout llName;
     private Unbinder unbinder;
     private Params params = Params.getInstance();
-    private GatewaysBean.DataBean hostBean;
+    private MainDeviceListBean.DataBean hostBean;
 
-    public static AddHostFragment newInstance(String hostCode, GatewaysBean.DataBean hostBean) {
+    public static AddHostFragment newInstance(String hostCode, MainDeviceListBean.DataBean hostBean) {
         Bundle args = new Bundle();
         args.putString(Constants.KEY_HOST_NUMBER, hostCode);
-        args.putParcelable(Constants.KEY_HOST, hostBean);
+        args.putSerializable(Constants.KEY_HOST, hostBean);
         AddHostFragment fragment = new AddHostFragment();
         fragment.setArguments(args);
         return fragment;
@@ -79,7 +79,7 @@ public class AddHostFragment extends BaseFragment<AddHostContract.Presenter> imp
         Bundle args = getArguments();
         if (args != null) {
             params.no = args.getString(Constants.KEY_HOST_NUMBER);
-            hostBean = args.getParcelable(Constants.KEY_HOST);
+            hostBean = (MainDeviceListBean.DataBean) args.getSerializable(Constants.KEY_HOST);
         }
     }
 
@@ -162,7 +162,7 @@ public class AddHostFragment extends BaseFragment<AddHostContract.Presenter> imp
         hostBean.getResidence().setAddr(params.addr);
         hostBean.getResidence().setAddrDet(params.addrDet);
         Bundle bundle = new Bundle();
-        bundle.putParcelable(Constants.KEY_HOST, hostBean);
+        bundle.putSerializable(Constants.KEY_HOST, hostBean);
         setFragmentResult(HostSettingsFragment.RESULT_HOST_SETTINGS, bundle);
         pop();
     }

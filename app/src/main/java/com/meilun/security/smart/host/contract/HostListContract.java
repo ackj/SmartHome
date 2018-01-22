@@ -1,7 +1,7 @@
 package com.meilun.security.smart.host.contract;
 
-import com.meilun.security.smart.entity.bean.GatewaysBean;
 import com.meilun.security.smart.common.Params;
+import com.meilun.security.smart.entity.bean.MainDeviceListBean;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import rx.Observable;
 public interface HostListContract {
 
     interface View extends BaseContract.View {
-        void responseGateways(List<GatewaysBean.DataBean> bean);
+        void responseGateways(List<MainDeviceListBean.DataBean> bean);
     }
 
     interface Presenter extends BaseContract.Presenter {
@@ -19,6 +19,6 @@ public interface HostListContract {
     }
 
     interface Model extends BaseContract.Model {
-        Observable<GatewaysBean> requestGateways(Params params);
+        Observable<MainDeviceListBean> requestGateways(Params params);
     }
 }
