@@ -11,7 +11,7 @@
         android:layout_marginTop="10dp"
         android:gravity="center_horizontal"
         android:text="第一路"
-        android:textColor="@color/light_blue"
+        android:textColor="@color/base_color"
         android:textSize="15sp" />
 
     <LinearLayout
@@ -51,7 +51,7 @@
             <ImageView
                 android:layout_width="47dp"
                 android:layout_height="47dp"
-                android:src="@drawable/selector_off" />
+                android:src="@drawable/selector_stop" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -71,7 +71,7 @@
             <ImageView
                 android:layout_width="47dp"
                 android:layout_height="47dp"
-                android:src="@drawable/selector_stop" />
+                android:src="@drawable/selector_off" />
 
             <TextView
                 android:layout_width="wrap_content"

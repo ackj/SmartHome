@@ -1,5 +1,6 @@
 package com.meilun.security.smart.entity.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public class MainDeviceListBean extends BaseBean{
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class DataBean implements Serializable{
         /**
          * defenseStatus : cancel
          * defenseStatusDes : 仅24小时模式的探测器处于防御状态，其他探测器处于未防御状态。
@@ -134,7 +135,7 @@ public class MainDeviceListBean extends BaseBean{
             this.status = status;
         }
 
-        public static class ResidenceBean {
+        public static class ResidenceBean implements Serializable {
             /**
              * addr :
              * addrDet :
@@ -146,6 +147,24 @@ public class MainDeviceListBean extends BaseBean{
             private String addrDet;
             private String fid;
             private String name;
+            private String lat;
+            private String lng;
+
+            public String getLat() {
+                return lat;
+            }
+
+            public void setLat(String lat) {
+                this.lat = lat;
+            }
+
+            public String getLng() {
+                return lng;
+            }
+
+            public void setLng(String lng) {
+                this.lng = lng;
+            }
 
             public String getAddr() {
                 return addr;

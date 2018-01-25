@@ -1,6 +1,7 @@
 package com.meilun.security.smart.security.model;
 
 import com.meilun.security.smart.common.ApiService;
+import com.meilun.security.smart.common.Constants;
 import com.meilun.security.smart.entity.bean.BaseBean;
 import com.meilun.security.smart.entity.bean.MainDeviceListBean;
 import com.meilun.security.smart.security.contract.SecurityContract;
@@ -41,7 +42,7 @@ public class SecurityModel extends BaseModel implements SecurityContract.Model {
         return HttpHelper.getService(ApiService.class)
                 .requestMainDeviceList(ApiService.requestMainDeviceList,
                         params.token,
-                        params.type,
+                        Constants.SMART_GATEWAY + "," + Constants.SMART_GATEWAY_GSW3,
                         params.page,
                         params.pageSize)
                 .subscribeOn(Schedulers.io());

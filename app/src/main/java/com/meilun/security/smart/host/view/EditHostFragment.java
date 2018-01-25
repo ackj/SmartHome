@@ -14,8 +14,8 @@ import com.meilun.security.smart.App;
 import com.meilun.security.smart.R;
 import com.meilun.security.smart.common.ApiService;
 import com.meilun.security.smart.common.Constants;
-import com.meilun.security.smart.entity.bean.GatewaysBean;
 import com.meilun.security.smart.common.Params;
+import com.meilun.security.smart.entity.bean.MainDeviceListBean;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,13 +45,13 @@ public class EditHostFragment extends BaseFragment {
     @BindView(R.id.et_name_edit_host_fragment)
     EditText etName;
     private Unbinder unbinder;
-    private GatewaysBean.DataBean hostBean;
+    private MainDeviceListBean.DataBean hostBean;
     private RxManager rxManager = new RxManager();
     private Params params = Params.getInstance();
 
-    public static EditHostFragment newInstance(GatewaysBean.DataBean hostBean) {
+    public static EditHostFragment newInstance(MainDeviceListBean.DataBean hostBean) {
         Bundle args = new Bundle();
-        args.putParcelable(Constants.KEY_HOST, hostBean);
+        args.putSerializable(Constants.KEY_HOST, hostBean);
         EditHostFragment fragment = new EditHostFragment();
         fragment.setArguments(args);
         return fragment;
@@ -62,7 +62,7 @@ public class EditHostFragment extends BaseFragment {
         super.onCreate(savedInstanceState);
         Bundle args = getArguments();
         if (args != null) {
-            hostBean = args.getParcelable(Constants.KEY_HOST);
+            hostBean = (MainDeviceListBean.DataBean) args.getSerializable(Constants.KEY_HOST);
         }
     }
 
@@ -122,7 +122,7 @@ public class EditHostFragment extends BaseFragment {
                         DialogHelper.successSnackbar(getView(), baseBean.getOther().getMessage());
                         hostBean.setName(params.name);
                         Bundle bundle = new Bundle();
-                        bundle.putParcelable(Constants.KEY_HOST, hostBean);
+                        bundle.putSerializable(Constants.KEY_HOST, hostBean);
                         setFragmentResult(HostSettingsFragment.RESULT_HOST_SETTINGS, bundle);
                     } else {
                         error(baseBean.getOther().getMessage());

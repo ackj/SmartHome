@@ -24,7 +24,7 @@ public class DeviceOnOffRVAdapter extends BaseRecyclerViewAdapter<Integer, BaseV
 
     @Override
     protected void convert(BaseViewHolder helper, Integer item) {
-        helper.setText(R.id.tv_way_no, "第 " + item + " 路")
+        helper.setText(R.id.tv_way_no, isCurtains ? "窗帘控制按钮" : "第 " + item + " 路")
                 .setVisible(R.id.ll_stop, isCurtains)
                 .addOnClickListener(R.id.ll_stop)
                 .addOnClickListener(R.id.ll_open)

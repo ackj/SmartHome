@@ -21,6 +21,7 @@ import com.meilun.security.smart.R;
 import com.meilun.security.smart.camera.CameraPlay2Activity;
 import com.meilun.security.smart.camera.CameraSettingFragment;
 import com.meilun.security.smart.camera.CameraWifiInput2Fragment;
+import com.meilun.security.smart.cateye.view.GenerateWifiFragment;
 import com.meilun.security.smart.cateye.view.MonitorFragment;
 import com.meilun.security.smart.common.Constants;
 import com.meilun.security.smart.common.Params;
@@ -134,7 +135,18 @@ public class DeviceListFragment extends BaseFragment<DeviceListPresenter> {
                                             })
                                             .show();
                                 } else if (which == 1) {
-                                    _mActivity.start(com.meilun.security.smart.cateye.view.AddDeviceFragment.newInstance());
+                                    new AlertDialog.Builder(_mActivity)
+                                            .setItems(new String[]{"新设备配置网络", "添加已联网设备"}, new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    if (which == 0) {
+                                                        _mActivity.start(GenerateWifiFragment.newInstance());
+                                                    } else if (which == 1) {
+                                                        _mActivity.start(com.meilun.security.smart.cateye.view.AddDeviceFragment.newInstance());
+                                                    }
+                                                }
+                                            })
+                                            .show();
                                 }
                             }
                         }).show();

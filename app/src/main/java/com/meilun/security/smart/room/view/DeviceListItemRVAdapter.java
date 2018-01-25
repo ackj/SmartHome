@@ -19,6 +19,7 @@ public class DeviceListItemRVAdapter extends BaseRecyclerViewAdapter<MainDeviceB
     @Override
     protected void convert(BaseViewHolder helper, MainDeviceBean item) {
         helper.setText(R.id.tv_name, item.name)
-                .setText(R.id.tv_id, item.deviceId);
+                .setText(R.id.tv_id, item.deviceId)
+                .setImageResource(R.id.iv_image,item.cateyeBean==null?R.drawable.ic_jiankong_220px:R.drawable.ic_equipment_cateye_220px);
     }
 }

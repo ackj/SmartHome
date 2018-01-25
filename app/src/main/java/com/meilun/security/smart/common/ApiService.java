@@ -665,7 +665,8 @@ public interface ApiService {
     @FormUrlEncoded
     @POST
     Observable<FirstLevelBean> requestFirstLevel(@Url String url,
-                                                 @Field("keywords") String keywords);
+                                                 @Field("keywords") String keywords,
+                                                 @Field("payFrom") String payFrom);
 
     //二级列表
     String requestSubCategoryLevel = "http://www.aglhz.com/mall/member/goodscategory/subCategoryLevelList.do";
@@ -708,7 +709,7 @@ public interface ApiService {
     @GET
     Observable<NewsBean> requestNewsList(@Url String url,
                                          @Query("token") String token,
-                                         @Query("fc") String fc,
+                                         @Query("code") String code,
                                          @Query("page") int page,
                                          @Query("pageSize") int pageSize);
 

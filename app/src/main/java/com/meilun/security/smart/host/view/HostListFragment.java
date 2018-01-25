@@ -14,10 +14,10 @@ import android.widget.TextView;
 
 import com.meilun.security.smart.R;
 import com.meilun.security.smart.common.Constants;
-import com.meilun.security.smart.entity.bean.GatewaysBean;
-import com.meilun.security.smart.host.presenter.HostListPresenter;
 import com.meilun.security.smart.common.Params;
+import com.meilun.security.smart.entity.bean.MainDeviceListBean;
 import com.meilun.security.smart.host.contract.HostListContract;
+import com.meilun.security.smart.host.presenter.HostListPresenter;
 import com.meilun.security.smart.qrcode.ScanQRCodeFragment;
 import com.meilun.security.smart.widget.PtrHTFrameLayout;
 
@@ -55,7 +55,7 @@ public class HostListFragment extends BaseFragment<HostListContract.Presenter> i
     private Params params = Params.getInstance();
     private StateManager mStateManager;
     private List<String> addHostTypes;
-    private GatewaysBean.DataBean hostBean;
+    private MainDeviceListBean.DataBean hostBean;
 
     public static HostListFragment newInstance() {
         return new HostListFragment();
@@ -179,7 +179,7 @@ public class HostListFragment extends BaseFragment<HostListContract.Presenter> i
     }
 
     @Override
-    public void responseGateways(List<GatewaysBean.DataBean> data) {
+    public void responseGateways(List<MainDeviceListBean.DataBean> data) {
         ptrFrameLayout.refreshComplete();
         if (data == null || data.isEmpty()) {
             if (params.page == 1) {
@@ -207,7 +207,7 @@ public class HostListFragment extends BaseFragment<HostListContract.Presenter> i
         ALog.e("resultCode-->" + resultCode);
 
         if (data != null) {
-            hostBean = data.getParcelable(Constants.KEY_HOST);
+            hostBean = (MainDeviceListBean.DataBean) data.getSerializable(Constants.KEY_HOST);
         }
     }
 }

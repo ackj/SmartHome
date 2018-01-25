@@ -10,13 +10,13 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.meilun.security.smart.R;
-import com.meilun.security.smart.entity.bean.BaseBean;
 import com.meilun.security.smart.App;
+import com.meilun.security.smart.R;
 import com.meilun.security.smart.common.Constants;
 import com.meilun.security.smart.common.Params;
-import com.meilun.security.smart.entity.bean.GatewaysBean;
+import com.meilun.security.smart.entity.bean.BaseBean;
 import com.meilun.security.smart.entity.bean.HostSettingsBean;
+import com.meilun.security.smart.entity.bean.MainDeviceListBean;
 import com.meilun.security.smart.host.contract.HostSettingsContract;
 import com.meilun.security.smart.host.presenter.HostSettingsPresenter;
 
@@ -44,12 +44,12 @@ public class AlertSmsFragment extends BaseFragment<HostSettingsContract.Presente
     @BindView(R.id.et_phone2_alert_sms_fragment)
     EditText etPhone2;
     private Unbinder unbinder;
-    private GatewaysBean.DataBean hostBean;
+    private MainDeviceListBean.DataBean hostBean;
     private Params params = Params.getInstance();
 
-    public static AlertSmsFragment newInstance(GatewaysBean.DataBean hostBean) {
+    public static AlertSmsFragment newInstance(MainDeviceListBean.DataBean hostBean) {
         Bundle args = new Bundle();
-        args.putParcelable(Constants.KEY_HOST, hostBean);
+        args.putSerializable(Constants.KEY_HOST, hostBean);
         AlertSmsFragment fragment = new AlertSmsFragment();
         fragment.setArguments(args);
         return fragment;
@@ -60,7 +60,7 @@ public class AlertSmsFragment extends BaseFragment<HostSettingsContract.Presente
         super.onCreate(savedInstanceState);
         Bundle args = getArguments();
         if (args != null) {
-            hostBean = args.getParcelable(Constants.KEY_HOST);
+            hostBean = (MainDeviceListBean.DataBean) args.getSerializable(Constants.KEY_HOST);
         }
     }
 

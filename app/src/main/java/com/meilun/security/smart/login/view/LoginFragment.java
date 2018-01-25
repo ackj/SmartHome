@@ -113,7 +113,7 @@ public class LoginFragment extends BaseFragment<LoginContract.Presenter> impleme
 
             @Override
             public void loginFaild() {
-                DialogHelper.errorSnackbar(getView(), "登录失败！");
+                DialogHelper.errorSnackbar(getView(), "登录猫眼失败！");
             }
         });
 

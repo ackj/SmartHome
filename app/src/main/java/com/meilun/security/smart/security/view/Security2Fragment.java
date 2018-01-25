@@ -130,9 +130,9 @@ public class Security2Fragment extends BaseFragment<SecurityPresenter> implement
         llHeaderLayout.setBackgroundResource(R.drawable.bg_security_header);
         List<BaseFragment> fragments = new ArrayList<>();
         defenseFragment = SecurityDefenseFragment.newInstance(gateway);
-        //默认设置一次
-        setTopView(ptrFrameLayout, defenseFragment.getRecyclerView());
         controlFragment = SecurityControlFragment.newInstance(gateway);
+        //默认刷新的RecyclerView为控制
+        setTopView(ptrFrameLayout, controlFragment.getRecyclerView());
         fragments.add(controlFragment);
         fragments.add(defenseFragment);
         viewpager.setAdapter(new SecurityVPAdapter(getChildFragmentManager(), fragments));
@@ -171,11 +171,11 @@ public class Security2Fragment extends BaseFragment<SecurityPresenter> implement
             @Override
             public void onPageSelected(int position) {
                 if (position == 0) {
-                    isDefense = true;
-                    setTopView(ptrFrameLayout, defenseFragment.getRecyclerView());
-                } else {
                     isDefense = false;
                     setTopView(ptrFrameLayout, controlFragment.getRecyclerView());
+                } else {
+                    isDefense = true;
+                    setTopView(ptrFrameLayout, defenseFragment.getRecyclerView());
                 }
             }
 
@@ -288,7 +288,6 @@ public class Security2Fragment extends BaseFragment<SecurityPresenter> implement
     private void requestPermissions() {
         if ((ContextCompat.checkSelfPermission(_mActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) &&
                 (ContextCompat.checkSelfPermission(_mActivity, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED)) {
-
         } else {
             ActivityCompat.requestPermissions(_mActivity,
                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO}, VOICE_REQUEST_CODE);
@@ -357,7 +356,9 @@ public class Security2Fragment extends BaseFragment<SecurityPresenter> implement
     @Override
     public void responseSwichGateway(BaseBean baseBean) {
         DialogHelper.successSnackbar(getView(), baseBean.getOther().getMessage());
-        ptrFrameLayout.autoRefresh();
+//        ptrFrameLayout.autoRefresh();
+        defenseFragment.onRefresh();
+        controlFragment.onRefresh();
         EventBus.getDefault().post(new EventSwitchHost());
     }
 

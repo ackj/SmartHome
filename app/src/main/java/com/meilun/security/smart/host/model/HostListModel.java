@@ -1,8 +1,9 @@
 package com.meilun.security.smart.host.model;
 
 import com.meilun.security.smart.common.ApiService;
-import com.meilun.security.smart.entity.bean.GatewaysBean;
+import com.meilun.security.smart.common.Constants;
 import com.meilun.security.smart.common.Params;
+import com.meilun.security.smart.entity.bean.MainDeviceListBean;
 import com.meilun.security.smart.host.contract.HostListContract;
 
 import cn.itsite.abase.mvp.model.base.BaseModel;
@@ -16,10 +17,17 @@ public class HostListModel extends BaseModel implements HostListContract.Model {
 
     }
 
-    public Observable<GatewaysBean> requestGateways(Params params) {
+    public Observable<MainDeviceListBean> requestGateways(Params params) {
+//        return HttpHelper.getService(ApiService.class)
+//                .requestGateways(ApiService.requestGateways,
+//                        params.token,
+//                        params.page,
+//                        params.pageSize)
+//                .subscribeOn(Schedulers.io());
         return HttpHelper.getService(ApiService.class)
-                .requestGateways(ApiService.requestGateways,
+                .requestMainDeviceList(ApiService.requestMainDeviceList,
                         params.token,
+                        Constants.SMART_GATEWAY + "," + Constants.SMART_GATEWAY_GSW3,
                         params.page,
                         params.pageSize)
                 .subscribeOn(Schedulers.io());

@@ -17,14 +17,14 @@ import android.widget.TextView;
 
 import com.meilun.security.smart.R;
 import com.meilun.security.smart.common.Constants;
+import com.meilun.security.smart.common.Params;
 import com.meilun.security.smart.entity.bean.AuthorizationBean;
 import com.meilun.security.smart.entity.bean.BaseBean;
-import com.meilun.security.smart.entity.bean.GatewaysBean;
+import com.meilun.security.smart.entity.bean.MainDeviceListBean;
 import com.meilun.security.smart.host.contract.AuthorizationContract;
+import com.meilun.security.smart.host.presenter.AuthorizationPresenter;
 import com.meilun.security.smart.qrcode.ScanQRCodeFragment;
 import com.meilun.security.smart.widget.PtrHTFrameLayout;
-import com.meilun.security.smart.common.Params;
-import com.meilun.security.smart.host.presenter.AuthorizationPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,14 +59,14 @@ public class AuthorizeFragment extends BaseFragment<AuthorizationContract.Presen
     private Unbinder unbinder;
     private AuthorizeAdapter adapter;
     private Params params = Params.getInstance();
-    private GatewaysBean.DataBean hostBean;
+    private MainDeviceListBean.DataBean hostBean;
     private StateManager mStateManager;
     private List<String> addHostTypes;
 
-    public static AuthorizeFragment newInstance(GatewaysBean.DataBean hostBean) {
+    public static AuthorizeFragment newInstance(MainDeviceListBean.DataBean hostBean) {
         AuthorizeFragment fragment = new AuthorizeFragment();
         Bundle bundle = new Bundle();
-        bundle.putParcelable("bean", hostBean);
+        bundle.putSerializable("bean", hostBean);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -82,7 +82,7 @@ public class AuthorizeFragment extends BaseFragment<AuthorizationContract.Presen
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
         unbinder = ButterKnife.bind(this, view);
-        hostBean = getArguments().getParcelable("bean");
+        hostBean = (MainDeviceListBean.DataBean) getArguments().getSerializable("bean");
         return attachToSwipeBack(view);
     }
 
