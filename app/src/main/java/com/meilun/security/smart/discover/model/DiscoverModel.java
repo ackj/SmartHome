@@ -23,7 +23,7 @@ import rx.schedulers.Schedulers;
 public class DiscoverModel extends BaseModel implements DiscoverContract.Model {
     @Override
     public Observable<FirstLevelBean> requestFirstLevel(Params params) {
-        return HttpHelper.getService(ApiService.class).requestFirstLevel(ApiService.requestFirstLevel,params.keywords,Constants.payFrom)
+        return HttpHelper.getService(ApiService.class).requestFirstLevel(ApiService.requestFirstLevel,params.keywords,Constants.fromPoint)
                 .subscribeOn(Schedulers.io());
     }
 
