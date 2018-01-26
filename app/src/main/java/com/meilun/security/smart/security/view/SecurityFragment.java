@@ -52,7 +52,7 @@ import cn.itsite.abase.common.DialogHelper;
 import cn.itsite.abase.mvp.view.base.BaseFragment;
 import cn.itsite.abase.utils.DensityUtils;
 import cn.itsite.adialog.dialogfragment.SelectorDialogFragment;
-import cn.itsite.apush.EventRefreshSecurity;
+import cn.itsite.apush.event.EventRefreshSecurity;
 import cn.itsite.statemanager.StateLayout;
 
 

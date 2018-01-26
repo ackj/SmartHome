@@ -45,7 +45,7 @@ import butterknife.Unbinder;
 import cn.itsite.abase.common.DialogHelper;
 import cn.itsite.abase.log.ALog;
 import cn.itsite.abase.mvp.view.base.BaseFragment;
-import cn.itsite.apush.EventRefreshSecurity;
+import cn.itsite.apush.event.EventRefreshSecurity;
 
 
 /**

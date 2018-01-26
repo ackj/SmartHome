@@ -9,7 +9,7 @@ import com.meilun.security.smart.entity.bean.SecurityBean;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseViewHolder;
 
-import cn.itsite.abase.BaseApplication;
+import cn.itsite.abase.BaseApp;
 import cn.itsite.abase.mvp.view.base.BaseRecyclerViewAdapter;
 
 /**
@@ -53,7 +53,7 @@ public class SecurityRVAdapter extends BaseRecyclerViewAdapter<SecurityBean.Data
                 .setVisible(R.id.iv_state, !"add_icon".equals(item.getIcon()))
                 .setImageResource(R.id.iv_state, pointState);
         ImageView ivSecurity = helper.getView(R.id.iv_icon_item_security);
-        Glide.with(BaseApplication.mContext)
+        Glide.with(BaseApp.mContext)
                 .load("add_icon".equals(item.getIcon()) ? R.drawable.ic_add_security_140px : item.getIcon())
                 .error(R.mipmap.ic_launcher)
                 .into(ivSecurity);

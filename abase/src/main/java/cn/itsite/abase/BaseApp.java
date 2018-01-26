@@ -11,10 +11,11 @@ import cn.itsite.abase.log.ALog;
  * Author：leguang on 2016/10/9 0009 15:49
  * Email：langmanleguang@qq.com
  */
-public class BaseApplication extends MultiDexApplication {
-    private static final String TAG = BaseApplication.class.getSimpleName();
+public class BaseApp extends MultiDexApplication {
+    private static final String TAG = BaseApp.class.getSimpleName();
     public static Context mContext;
-//    private RefWatcher mRefWatcher;
+    //    private RefWatcher mRefWatcher;
+    public static String PUSH_TYPE = "";
 
     @Override
     public void onCreate() {

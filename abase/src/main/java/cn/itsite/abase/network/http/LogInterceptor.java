@@ -9,7 +9,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-import cn.itsite.abase.BaseApplication;
+import cn.itsite.abase.BaseApp;
 import cn.itsite.abase.log.ALog;
 import okhttp3.FormBody;
 import okhttp3.Interceptor;
@@ -76,7 +76,7 @@ public class LogInterceptor implements Interceptor {
                 Intent intent = new Intent("com.meilun.security.smart.login.LoginActivity");
                 //不添加这个Flag则会报如下错误：Calling startActivity() from outside of an Activity  context requires the FLAG_ACTIVITY_NEW_TASK flag. Is this really what you want?
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                BaseApplication.mContext.startActivity(intent);
+                BaseApp.mContext.startActivity(intent);
                 EventBus.getDefault().post(new LogInterceptor());
             }
         } catch (JSONException e) {

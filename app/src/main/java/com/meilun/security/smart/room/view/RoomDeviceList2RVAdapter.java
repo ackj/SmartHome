@@ -7,7 +7,7 @@ import com.meilun.security.smart.entity.bean.DeviceListBean;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseViewHolder;
 
-import cn.itsite.abase.BaseApplication;
+import cn.itsite.abase.BaseApp;
 import cn.itsite.abase.mvp.view.base.BaseRecyclerViewAdapter;
 
 /**
@@ -28,7 +28,7 @@ public class RoomDeviceList2RVAdapter extends BaseRecyclerViewAdapter<DeviceList
                 .addOnClickListener(R.id.ll_container);
 
         ImageView ivIcon = helper.getView(R.id.iv_icon);
-        Glide.with(BaseApplication.mContext)
+        Glide.with(BaseApp.mContext)
                 .load(item.getIcon())
                 .into(ivIcon);
     }
