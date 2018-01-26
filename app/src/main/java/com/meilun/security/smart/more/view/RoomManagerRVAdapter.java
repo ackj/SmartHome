@@ -7,7 +7,7 @@ import com.meilun.security.smart.R;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseViewHolder;
 
-import cn.itsite.abase.BaseApplication;
+import cn.itsite.abase.BaseApp;
 import cn.itsite.abase.mvp.view.base.BaseRecyclerViewAdapter;
 
 /**
@@ -42,7 +42,7 @@ public class RoomManagerRVAdapter extends BaseRecyclerViewAdapter<RoomsBean.Data
                 ivRes = R.drawable.ic_add_security_140px;
                 break;
         }
-        Glide.with(BaseApplication.mContext)
+        Glide.with(BaseApp.mContext)
                 .load(ivRes)
                 .error(R.mipmap.ic_launcher)
                 .into(ivIcon);

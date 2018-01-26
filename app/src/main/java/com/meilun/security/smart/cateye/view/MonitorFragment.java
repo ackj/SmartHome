@@ -53,7 +53,7 @@ import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-import static cn.itsite.abase.BaseApplication.mContext;
+import static cn.itsite.abase.BaseApp.mContext;
 
 /**
  * Author: LiuJia on 2017/5/4 0004 15:38.

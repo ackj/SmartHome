@@ -1,11 +1,10 @@
 package com.meilun.security.smart.login.model;
 
-import com.meilun.security.smart.App;
 import com.meilun.security.smart.common.ApiService;
-import com.meilun.security.smart.common.UserHelper;
-import com.meilun.security.smart.login.contract.LoginContract;
 import com.meilun.security.smart.common.Params;
+import com.meilun.security.smart.common.UserHelper;
 import com.meilun.security.smart.entity.bean.UserBean;
+import com.meilun.security.smart.login.contract.LoginContract;
 
 import cn.itsite.abase.log.ALog;
 import cn.itsite.abase.mvp.model.base.BaseModel;
@@ -35,7 +34,7 @@ public class LoginModel extends BaseModel implements LoginContract.Model {
     @Override
     public void registerPush() {
         HttpHelper.getService(ApiService.class)
-                .registerDevice(ApiService.registerDevice, UserHelper.token, App.deviceID, UserHelper.account, "userType")
+                .registerDevice(ApiService.registerDevice, UserHelper.token, UserHelper.getDeviceID(), UserHelper.account, "userType")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(baseBean -> ALog.e(TAG, baseBean.getOther().getMessage()));

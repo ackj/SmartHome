@@ -7,7 +7,7 @@ import com.meilun.security.smart.entity.bean.DeviceListBean;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseViewHolder;
 
-import cn.itsite.abase.BaseApplication;
+import cn.itsite.abase.BaseApp;
 import cn.itsite.abase.mvp.view.base.BaseRecyclerViewAdapter;
 
 /**
@@ -27,7 +27,7 @@ public class DeviceGridRVAdapter extends BaseRecyclerViewAdapter<DeviceListBean.
                 .setText(R.id.tv_name_item_security, item.getName());
 
         ImageView ivIcon = helper.getView(R.id.iv_icon_item_security);
-        Glide.with(BaseApplication.mContext)
+        Glide.with(BaseApp.mContext)
                 .load("add_icon".equals(item.getIcon()) ? R.drawable.ic_add_security_140px : item.getIcon())
                 .error(R.mipmap.ic_launcher)
                 .into(ivIcon);

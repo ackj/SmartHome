@@ -4,9 +4,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
 
+import com.google.gson.Gson;
 import com.meilun.security.smart.App;
 import com.meilun.security.smart.entity.bean.UserBean;
-import com.google.gson.Gson;
 
 import cn.itsite.abase.log.ALog;
 
@@ -23,13 +23,11 @@ public class UserHelper {
     public static final String PASSWORD = "password";
     public static final String USER_INFO = "user_info";
     public static final String ISREMEMBER = "isRemember";
-
     public static String account = "";//账户、密码、是否记住密码，这三个值是记录在默认SP中的。
     public static String password = "";//同时账户和密码在各自的SP中也有一份。
-
     public static String FILE_NAME = "default";
     public static String token = "";
-
+    public static final String DEVICE_ID = "device_id";
     public static UserBean.DataBean.MemberInfoBean userInfo;
 
     //判断是否登录。
@@ -108,6 +106,10 @@ public class UserHelper {
     public static void init() {
         FILE_NAME = getDefaultSp().getString(ACCOUNT, "");
         initData();
+    }
+
+    public static String getDeviceID() {
+        return getDefaultSp().getString(DEVICE_ID, "");
     }
 
     private static void initData() {

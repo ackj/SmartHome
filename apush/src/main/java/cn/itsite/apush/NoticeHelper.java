@@ -17,8 +17,10 @@ import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.EventBus;
 
-import cn.itsite.abase.BaseApplication;
+import cn.itsite.abase.BaseApp;
 import cn.itsite.abase.log.ALog;
+import cn.itsite.apush.event.EventLearnSensor;
+import cn.itsite.apush.event.EventRefreshSecurity;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 import static android.media.RingtoneManager.getDefaultUri;
@@ -66,12 +68,12 @@ public class NoticeHelper {
         PendingIntent pendingIntent = contentIntent(mContext, notice.getType());
         handleMessage(notice.getType());
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(BaseApplication.mContext)
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(BaseApp.mContext)
                 .setContentTitle(notice.getTitle())
                 .setContentText(notice.getContent())
                 .setWhen(when)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setLargeIcon(BitmapFactory.decodeResource(BaseApplication.mContext.getResources(), R.mipmap.ic_launcher))
+                .setLargeIcon(BitmapFactory.decodeResource(BaseApp.mContext.getResources(), R.mipmap.ic_launcher))
                 .setSound(uriSound)
                 .setVibrate(new long[]{0, 1000, 1000, 1000})
                 .setLights(Color.RED, 1000, 1000)
@@ -86,7 +88,7 @@ public class NoticeHelper {
     }
 
     public static void notify(String message, Notification notification) {
-        NotificationManager manager = (NotificationManager) BaseApplication.mContext.getSystemService(NOTIFICATION_SERVICE);
+        NotificationManager manager = (NotificationManager) BaseApp.mContext.getSystemService(NOTIFICATION_SERVICE);
         manager.notify(message.hashCode(), notification);
     }
 
@@ -111,7 +113,7 @@ public class NoticeHelper {
      */
     private static void handleMessage(String type) {
 
-        PowerManager pm = (PowerManager) BaseApplication.mContext.getSystemService(Context.POWER_SERVICE);
+        PowerManager pm = (PowerManager) BaseApp.mContext.getSystemService(Context.POWER_SERVICE);
         PowerManager.WakeLock wakeLock = pm.newWakeLock(PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.SCREEN_DIM_WAKE_LOCK, "notice");
         wakeLock.acquire();
 //        wakeLock.release();
@@ -174,7 +176,7 @@ public class NoticeHelper {
     }
 
     public static void cancel(int id) {
-        NotificationManager manager = (NotificationManager) BaseApplication.mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager manager = (NotificationManager) BaseApp.mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         manager.cancel(id);
     }
 }

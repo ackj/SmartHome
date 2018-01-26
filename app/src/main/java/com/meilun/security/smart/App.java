@@ -6,14 +6,8 @@ import android.os.Bundle;
 
 import com.Player.Core.PlayerClient;
 import com.Player.web.response.DevItemInfo;
-import com.alibaba.sdk.android.push.CloudPushService;
-import com.alibaba.sdk.android.push.CommonCallback;
-import com.alibaba.sdk.android.push.noonesdk.PushServiceFactory;
-import com.alibaba.sdk.android.push.register.HuaWeiRegister;
-import com.alibaba.sdk.android.push.register.MiPushRegister;
 import com.bilibili.boxing.BoxingMediaLoader;
 import com.bilibili.boxing.loader.IBoxingMediaLoader;
-import com.meilun.security.smart.common.ApiService;
 import com.meilun.security.smart.common.BoxingGlideLoader;
 import com.meilun.security.smart.common.UserHelper;
 import com.meilun.security.smart.common.sdk.WriteLogThread;
@@ -22,17 +16,15 @@ import com.p2p.core.P2PSpecial.P2PSpecial;
 import java.util.Collections;
 import java.util.List;
 
-import cn.itsite.abase.BaseApplication;
+import cn.itsite.abase.BaseApp;
 import cn.itsite.abase.log.ALog;
-import cn.itsite.abase.network.http.HttpHelper;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import cn.itsite.apush.PushHelper;
 
 /**
  * Created by leguang on 2017/6/22 0022.
  * Email：langmanleguang@qq.com
  */
-public class App extends BaseApplication implements Application.ActivityLifecycleCallbacks {
+public class App extends BaseApp implements Application.ActivityLifecycleCallbacks {
     private static final String TAG = App.class.getSimpleName();
     //    public final static String APPID="1e9a2c3ead108413e8218a639c540e44";
     public final static String APPID = "fe17b3e35717f4006a5d10a9106eb232";
@@ -110,34 +102,9 @@ public class App extends BaseApplication implements Application.ActivityLifecycl
     }
 
     /**
-     * 初始化云推送通道
+     * 初始化推送。
      */
     public void initPush() {
-        PushServiceFactory.init(mContext);
-        CloudPushService pushService = PushServiceFactory.getCloudPushService();
-        pushService.register(mContext, new CommonCallback() {
-            @Override
-            public void onSuccess(String response) {
-                ALog.e(TAG, "init cloudchannel success");
-                ALog.e(TAG, "getDeviceId-->" + pushService.getDeviceId());
-                deviceID = "and_" + pushService.getDeviceId();
-                HttpHelper.getService(ApiService.class)
-                        .registerDevice(ApiService.registerDevice, UserHelper.token, deviceID, UserHelper.account, "userType")
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(baseBean -> ALog.e(TAG, baseBean.getOther().getMessage()));
-            }
-
-            @Override
-            public void onFailed(String errorCode, String errorMessage) {
-                ALog.e(TAG, "init cloudchannel failed -- errorcode:" + errorCode + " -- errorMessage:" + errorMessage);
-            }
-        });
-
-        // 注册方法会自动判断是否支持小米系统推送，如不支持会跳过注册。
-        MiPushRegister.register(mContext, "2882303761517633954", "5551763357954");
-
-        // 注册方法会自动判断是否支持华为系统推送，如不支持会跳过注册。
-        HuaWeiRegister.register(mContext);
+        PushHelper.init(this);
     }
 }

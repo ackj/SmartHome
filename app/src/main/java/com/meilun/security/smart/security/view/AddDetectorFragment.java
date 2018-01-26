@@ -33,7 +33,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cn.itsite.abase.common.DialogHelper;
 import cn.itsite.abase.mvp.view.base.BaseFragment;
-import cn.itsite.apush.EventLearnSensor;
+import cn.itsite.apush.event.EventLearnSensor;
 import cn.itsite.statemanager.StateLayout;
 import cn.itsite.statemanager.StateManager;
 

@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
 import java.util.Map;
 
 public class SPCache {
-    private final String TAG = SPCache.class.getSimpleName();
+    private final String TAG = this.getClass().getSimpleName();
 
     private SPCache() {
         throw new UnsupportedOperationException("cannot be instantiated");
@@ -17,7 +17,7 @@ public class SPCache {
     /**
      * 保存在手机里面的文件名
      */
-    public static final String FILE_NAME = "setting";
+    public static final String FILE_NAME = "default";
 
     /**
      * 保存数据的方法，我们需要拿到保存数据的具体类型，然后根据类型调用不同的保存方法

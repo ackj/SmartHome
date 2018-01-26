@@ -31,6 +31,8 @@ import com.vector.update_app.UpdateAppBean;
 import com.vector.update_app.UpdateAppManager;
 import com.vector.update_app.UpdateCallback;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -151,9 +153,17 @@ public class MainFragment extends BaseFragment implements EasyPermissions.Permis
      * 检测是否有新版本需要下载更新。
      */
     private void updateApp() {
-        ALog.e("requestAppUpdatae-->" + ApiService.requestAppUpdatae);
+        String random = System.currentTimeMillis() + "";
+        String accessKey = Constants.SYS_ACCESS_PREFIX + random + Constants.SYS_ACCESS_KEY;
+        ALog.e("random-->" + random);
+        ALog.e("accessKey-->" + accessKey);
+        ALog.e("getMd5(accessKey)-->" + getMd5(accessKey));
+
         Map<String, String> params = new HashMap<>();
-        params.put("appType", "1");
+        params.put("accessKey", getMd5(accessKey));
+        params.put("random", random);
+        params.put("sc", Constants.SC);
+        params.put("appType", Constants.APP_TYPE);
 
         new UpdateAppManager
                 .Builder()
@@ -236,5 +246,24 @@ public class MainFragment extends BaseFragment implements EasyPermissions.Permis
         } else {
             ActivityManager.getInstance().finishActivity(NetActivity.class);
         }
+    }
+
+    private String getMd5(String str) {
+        StringBuffer sb = new StringBuffer();
+        try {
+            //获取加密方式为md5的算法对象
+            MessageDigest instance = MessageDigest.getInstance("MD5");
+            byte[] digest = instance.digest(str.getBytes());
+            for (byte b : digest) {
+                String hexString = Integer.toHexString(b & 0xff);
+                if (hexString.length() < 2) {
+                    hexString = "0" + hexString;
+                }
+                sb = sb.append(hexString);
+            }
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return sb.toString();
     }
 }

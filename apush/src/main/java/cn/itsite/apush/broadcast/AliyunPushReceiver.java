@@ -15,8 +15,8 @@ import cn.itsite.apush.NoticeHelper;
  * Email：langmanleguang@qq.com
  */
 
-public class NotificationReceiver extends MessageReceiver {
-    public static final String TAG = NotificationReceiver.class.getSimpleName();
+public class AliyunPushReceiver extends MessageReceiver {
+    public static final String TAG = AliyunPushReceiver.class.getSimpleName();
 
     @Override
     public void onNotification(Context context, final String title, final String summary, final Map<String, String> extraMap) {
