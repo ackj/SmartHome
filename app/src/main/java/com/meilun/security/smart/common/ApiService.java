@@ -666,7 +666,7 @@ public interface ApiService {
     @POST
     Observable<FirstLevelBean> requestFirstLevel(@Url String url,
                                                  @Field("keywords") String keywords,
-                                                 @Field("payFrom") String payFrom);
+                                                 @Field("fromPoint") String fromPoint);
 
     //二级列表
     String requestSubCategoryLevel = "http://www.aglhz.com/mall/member/goodscategory/subCategoryLevelList.do";
@@ -686,7 +686,8 @@ public interface ApiService {
     Observable<GoodsBean> requestGoodsList(@Url String url,
                                            @Field("token") String token,
                                            @Field("appType") int appType,
-                                           @Field("secondCategoryId") String id);
+                                           @Field("secondCategoryId") String id,
+                                           @Field("fromPoint")String fromPoint);
 
     String requestDeviceNotAlone = BASE_URL + "/client/info/subDevicesNotAlone";
 

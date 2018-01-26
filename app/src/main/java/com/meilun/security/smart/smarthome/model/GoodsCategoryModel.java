@@ -1,6 +1,7 @@
 package com.meilun.security.smart.smarthome.model;
 
 import com.meilun.security.smart.common.ApiService;
+import com.meilun.security.smart.common.Constants;
 import com.meilun.security.smart.smarthome.contract.GoodsCategoryContract;
 import com.meilun.security.smart.common.Params;
 import com.meilun.security.smart.entity.bean.FirstLevelBean;
@@ -25,7 +26,7 @@ public class GoodsCategoryModel extends BaseModel implements GoodsCategoryContra
 
     @Override
     public Observable<FirstLevelBean> requestFirstLevel(Params params) {
-        return HttpHelper.getService(ApiService.class).requestFirstLevel(ApiService.requestFirstLevel,params.keywords)
+        return HttpHelper.getService(ApiService.class).requestFirstLevel(ApiService.requestFirstLevel,params.keywords, Constants.fromPoint)
                 .subscribeOn(Schedulers.io());
     }
 }
